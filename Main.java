@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 import java.util.Scanner;
 
+import static java.lang.System.exit;
+
 public class Main {
     public static void main(String[] args) {
         StaffMemberHelp.addStaffMember();
@@ -34,11 +36,13 @@ public class Main {
                     case 4:
                         StaffMemberHelp.removeStaffMembers();
                         break;
+                    case 5:
+                        exit(0);
                     default:
                         System.out.println("Invalid choice, please try again.");
                 }
             } catch (Exception e) {
-                System.out.println("Error: Invalid input. Please enter a number.");
+                System.out.println("Invalid input. Please enter a number.");
                 scanner.nextLine();
             }
         }

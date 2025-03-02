@@ -23,65 +23,24 @@ public class StaffMemberHelp {
         staffMembers.add(new SalariedEmployee(3, "Alice Johnson", "123 Maple St", 55000, 5000));
         staffMembers.add(new HourlySalaryEmployee(4, "Alice Green", "123 Oak St", 40, 15.50));
     }
-
-//    public static void getStaffMembers() {
-//        Table t = HelperClass.createTableHeader("Display Employee Details");
-//        staffMembers.forEach(staffMember -> {
-//            if (staffMember instanceof Volunteer volunteer) {
-//                t.addCell(HelperClass.yellow + "Volunteer" + HelperClass.reset, cellStyle);
-//                t.addCell(HelperClass.yellow + volunteer.getId() + HelperClass.reset, cellStyle);
-//                t.addCell(HelperClass.yellow + volunteer.getName() + HelperClass.reset, cellStyle);
-//                t.addCell(HelperClass.yellow + volunteer.getAddress() + HelperClass.reset, cellStyle);
-//                t.addCell(HelperClass.yellow + volunteer.getSalary() + HelperClass.reset, cellStyle);
-//                t.addCell(HelperClass.yellow + "---" + HelperClass.reset, cellStyle);
-//                t.addCell(HelperClass.yellow + "---" + HelperClass.reset, cellStyle);
-//                t.addCell(HelperClass.yellow + "---" + HelperClass.reset, cellStyle);
-//                t.addCell(HelperClass.yellow + "$" + volunteer.pay() + HelperClass.reset, cellStyle);
-//
-//            }
-//            else if (staffMember instanceof HourlySalaryEmployee hourlySalaryEmployee) {
-//                t.addCell(HelperClass.yellow + "HourlySalaryEmployee" + HelperClass.reset, cellStyle);
-//                t.addCell(HelperClass.yellow + hourlySalaryEmployee.getId() + HelperClass.reset, cellStyle);
-//                t.addCell(HelperClass.yellow + hourlySalaryEmployee.getName() + HelperClass.reset, cellStyle);
-//                t.addCell(HelperClass.yellow + hourlySalaryEmployee.getAddress() + HelperClass.reset, cellStyle);
-//                t.addCell(HelperClass.yellow + "---" + HelperClass.reset, cellStyle);
-//                t.addCell(HelperClass.yellow + "---" + HelperClass.reset, cellStyle);
-//                t.addCell(HelperClass.yellow + hourlySalaryEmployee.getHourWorked() + HelperClass.reset, cellStyle);
-//                t.addCell(HelperClass.yellow + "$" + hourlySalaryEmployee.getRate() + HelperClass.reset, cellStyle);
-//                t.addCell(HelperClass.yellow + "$" + hourlySalaryEmployee.pay() + HelperClass.reset, cellStyle);
-//            } else if (staffMember instanceof SalariedEmployee salariedEmployee) {
-//                t.addCell(HelperClass.yellow + "SalariedEmployee" + HelperClass.reset, cellStyle);
-//                t.addCell(HelperClass.yellow + salariedEmployee.getId() + HelperClass.reset, cellStyle);
-//                t.addCell(HelperClass.yellow + salariedEmployee.getName() + HelperClass.reset, cellStyle);
-//                t.addCell(HelperClass.yellow + salariedEmployee.getAddress() + HelperClass.reset, cellStyle);
-//                t.addCell(HelperClass.yellow + salariedEmployee.getSalary() + HelperClass.reset, cellStyle);
-//                t.addCell(HelperClass.yellow + salariedEmployee.getBonus() + HelperClass.reset, cellStyle);
-//                t.addCell(HelperClass.yellow + "---" + HelperClass.reset, cellStyle);
-//                t.addCell(HelperClass.yellow + "---" + HelperClass.reset, cellStyle);
-//                t.addCell(HelperClass.yellow + "$" + salariedEmployee.pay() + HelperClass.reset, cellStyle);
-//            }
-//        });
-//        System.out.println(t.render());
-//    }
-
     public static void insertStaffMembers() {
         Scanner scanner = new Scanner(System.in);
         HelperClass.menuTypeOfStaffMember();
-        System.out.print("Enter type of staffMember : ");
-        String n = scanner.nextLine();
+        System.out.print("Enter type of staff member: ");
+        String n = validateInput(new Scanner(System.in), "type", "\\d+", "Enter type of staff member:");
         try {
             switch (n) {
                 case "1":
                     int ids = ++id;
                     System.out.println("ID: " + (ids));
                     System.out.print("Enter name: ");
-                    String name = validateInput(scanner, "name", "[A-Za-z ]+");
+                    String name = validateInput(scanner, "name", "[A-Za-z ]+", "Enter name: ");
 
                     System.out.print("Enter Address: ");
-                    String address = validateInput(scanner, "address", "[A-Za-z0-9 ,.-]+");
+                    String address = validateInput(scanner, "address", "[A-Za-z0-9 ,.-]+", "Enter Address: ");
 
                     System.out.print("Enter Salary: ");
-                    double salary = Double.parseDouble(validateInput(scanner, "salary", "\\d+(\\.\\d+)?"));
+                    double salary = Double.parseDouble(validateInput(scanner, "salary", "\\d+(\\.\\d+)?", "Enter Salary: "));
 
                     Volunteer newVolunteer = new Volunteer(ids, name, address, salary);
                     System.out.println("**** Your add successfully for add to list**** ");
@@ -93,16 +52,16 @@ public class StaffMemberHelp {
                     System.out.println("ID: " + (ides));
 
                     System.out.print("Enter name: ");
-                    String salariesEmployee = validateInput(scanner, "name", "[A-Za-z ]+");
+                    String salariesEmployee = validateInput(scanner, "name", "[A-Za-z ]+", "Enter name: ");
 
                     System.out.print("Enter Address: ");
-                    String addressEmployee = validateInput(scanner, "address", "[A-Za-z0-9 ,.-]+");
+                    String addressEmployee = validateInput(scanner, "address", "[A-Za-z0-9 ,.-]+", "Enter Address: ");
 
                     System.out.print("Enter Salary: ");
-                    double salaryEmployee = Double.parseDouble(validateInput(scanner, "salary", "\\d+(\\.\\d+)?"));
+                    double salaryEmployee = Double.parseDouble(validateInput(scanner, "salary", "\\d+(\\.\\d+)?", "Enter Salary: "));
 
                     System.out.print("Enter Bonus: ");
-                    double bonus = Double.parseDouble(validateInput(scanner, "bonus", "\\d+(\\.\\d+)?"));
+                    double bonus = Double.parseDouble(validateInput(scanner, "bonus", "\\d+(\\.\\d+)?", "Enter Bonus: "));
 
                     SalariedEmployee salariedEmployee = new SalariedEmployee(ides, salariesEmployee, addressEmployee, salaryEmployee, bonus);
                     staffMembers.add(salariedEmployee);
@@ -113,16 +72,16 @@ public class StaffMemberHelp {
                     System.out.println("ID: " + (hourlySalaryId));
 
                     System.out.print("Enter name: ");
-                    String hourlyEmployee = validateInput(scanner, "name", "[A-Za-z ]+");
+                    String hourlyEmployee = validateInput(scanner, "name", "[A-Za-z ]+", "Enter name: ");
 
                     System.out.print("Enter Address: ");
-                    String addressHourlyEmployee = validateInput(scanner, "address", "[A-Za-z0-9 ,.-]+");
+                    String addressHourlyEmployee = validateInput(scanner, "address", "[A-Za-z0-9 ,.-]+", "Enter Address: ");
 
                     System.out.print("Enter HourWork: ");
-                    int hourWork = Integer.parseInt(validateInput(scanner, "hour work", "\\d+"));
+                    int hourWork = Integer.parseInt(validateInput(scanner, "hour work", "\\d+", "Enter HourWork: "));
 
                     System.out.print("Enter Rate: ");
-                    double rate = Double.parseDouble(validateInput(scanner, "rate", "\\d+(\\.\\d+)?"));
+                    double rate = Double.parseDouble(validateInput(scanner, "rate", "\\d+(\\.\\d+)?", "Enter Rate: "));
 
                     HourlySalaryEmployee hourlySalaryEmployee = new HourlySalaryEmployee(hourlySalaryId, hourlyEmployee, addressHourlyEmployee, hourWork, rate);
                     staffMembers.add(hourlySalaryEmployee);
@@ -140,44 +99,47 @@ public class StaffMemberHelp {
             System.out.println("An error occurred: " + e.getMessage());
         }
     }
-
-    private static String validateInput(Scanner scanner, String fieldName, String regex) {
-        while (true) {
-            String input = scanner.nextLine();
-            if (Pattern.matches(regex, input)) {
-                return input;
-            } else {
-                System.out.println("Invalid " + fieldName + "! Please enter a valid " + fieldName + ".");
-            }
+    public static String validateInput(Scanner scanner, String fieldName, String regex, String prompt) {
+        String input = scanner.nextLine();
+        while (!Pattern.matches(regex, input)) {
+            System.out.println("Invalid " + fieldName + "! Please enter a valid " + fieldName + ".");
+            System.out.print(prompt);
+            input = scanner.nextLine();
         }
+        return input;
     }
     public static void addStaffMemberRow(Table t, StaffMember staffMember) {
         String role, id, name, address, salary = "---", bonus = "---", hoursWorked = "---", rate = "---", pay;
-        if (staffMember instanceof Volunteer volunteer) {
-            role = "Volunteer";
-            id = String.valueOf(volunteer.getId());
-            name = volunteer.getName();
-            address = volunteer.getAddress();
-            salary = String.valueOf(volunteer.getSalary());
-            pay = "$" + volunteer.pay();
-        } else if (staffMember instanceof HourlySalaryEmployee hourlySalaryEmployee) {
-            role = "HourlySalaryEmployee";
-            id = String.valueOf(hourlySalaryEmployee.getId());
-            name = hourlySalaryEmployee.getName();
-            address = hourlySalaryEmployee.getAddress();
-            hoursWorked = String.valueOf(hourlySalaryEmployee.getHourWorked());
-            rate = "$" + hourlySalaryEmployee.getRate();
-            pay = "$" + hourlySalaryEmployee.pay();
-        } else if (staffMember instanceof SalariedEmployee salariedEmployee) {
-            role = "SalariedEmployee";
-            id = String.valueOf(salariedEmployee.getId());
-            name = salariedEmployee.getName();
-            address = salariedEmployee.getAddress();
-            salary = String.valueOf(salariedEmployee.getSalary());
-            bonus = String.valueOf(salariedEmployee.getBonus());
-            pay = "$" + salariedEmployee.pay();
-        } else {
-            return; // Skip unknown staff types
+        switch (staffMember) {
+            case Volunteer volunteer -> {
+                role = "Volunteer";
+                id = String.valueOf(volunteer.getId());
+                name = volunteer.getName();
+                address = volunteer.getAddress();
+                salary = String.valueOf(volunteer.getSalary());
+                pay = "$" + volunteer.pay();
+            }
+            case HourlySalaryEmployee hourlySalaryEmployee -> {
+                role = "HourlySalaryEmployee";
+                id = String.valueOf(hourlySalaryEmployee.getId());
+                name = hourlySalaryEmployee.getName();
+                address = hourlySalaryEmployee.getAddress();
+                hoursWorked = String.valueOf(hourlySalaryEmployee.getHourWorked());
+                rate = "$" + hourlySalaryEmployee.getRate();
+                pay = "$" + hourlySalaryEmployee.pay();
+            }
+            case SalariedEmployee salariedEmployee -> {
+                role = "SalariedEmployee";
+                id = String.valueOf(salariedEmployee.getId());
+                name = salariedEmployee.getName();
+                address = salariedEmployee.getAddress();
+                salary = String.valueOf(salariedEmployee.getSalary());
+                bonus = String.valueOf(salariedEmployee.getBonus());
+                pay = "$" + salariedEmployee.pay();
+            }
+            case null, default -> {
+                return; // Skip unknown staff types
+            }
         }
 
         t.addCell(HelperClass.yellow + role + HelperClass.reset, cellStyle);
@@ -237,96 +199,46 @@ public class StaffMemberHelp {
             }
         }
     }
-        public static void printPaginationStaffMembers() {
+    public static void printPaginationStaffMembers() {
             if (staffMembers.isEmpty()) {
                 System.out.println(red + "No staff members available." + reset);
                 return;
             }
             paginationStaffMembers(staffMembers, "INFORMATION OF ALL STAFF MEMBERS");
-        }
-
-//    public static void insertStaffMembers() {
-//        Scanner scanner = new Scanner(System.in);
-//        HelperClass.menuTypeOfStaffMember();
-//        System.out.print("Enter type of staffMember : ");
-//        String n = scanner.nextLine();
-//        switch (n) {
-//            case "1":
-//                int ids  = ++id;
-//                System.out.println("ID: " + (ids));
-//                System.out.print("Enter name :");
-//                String name = scanner.nextLine();
-//                System.out.print("Enter Address:");
-//                String address = scanner.nextLine();
-//                System.out.print("Enter Salary :");
-//                double salary = scanner.nextDouble();
-//                Volunteer newVolunteer = new Volunteer(ids, name, address, salary);
-//                System.out.println("**** Your add successfully for add to list**** ");
-//                staffMembers.add(newVolunteer);
-//                break;
-//            case "2":
-//                int ides = ++id;
-//                System.out.println("ID: " + (ides));
-//                System.out.print("Enter name :");
-//                String salariesEmployee = scanner.nextLine();
-//                System.out.print("Enter Address:");
-//                String addressEmployee = scanner.nextLine();
-//                System.out.print("Enter Salary :");
-//                double salaryEmployee = scanner.nextDouble();
-//                System.out.println("Enter Bonus");
-//                double bonus = scanner.nextDouble();
-//                SalariedEmployee salariedEmployee = new SalariedEmployee(ides, salariesEmployee, addressEmployee, salaryEmployee, bonus);
-//                staffMembers.add(salariedEmployee);
-//                break;
-//            case "3":
-//                int hourlySalaryId = ++id;
-//                System.out.println("ID: " + (hourlySalaryId));
-//                System.out.print("Enter name :");
-//                String hourlyEmployee = scanner.nextLine();
-//                System.out.print("Enter Address:");
-//                String addressHourlyEmployee = scanner.nextLine();
-//                System.out.print("Enter HourWork: :");
-//                int hourWork = scanner.nextInt();
-//                System.out.print("Enter Rate :");
-//                double rate = scanner.nextDouble();
-//                HourlySalaryEmployee hourlySalaryEmployee = new HourlySalaryEmployee(hourlySalaryId
-//                        , hourlyEmployee, addressHourlyEmployee, hourWork, rate);
-//                staffMembers.add(hourlySalaryEmployee);
-//                break;
-//            case "4":
-//                return;
-//            default:
-//                System.out.println("Invalid option! Try again.");
-//        }
-//    }
-
+    }
     public static void upDateStaffMembers() {
-        System.out.println("=======*" + "Update Employee" + "*=======");
-        System.out.print("Enter ID to search for Update: ");
-        int id = new Scanner(System.in).nextInt();
-        StaffMember staff = staffMembers.stream()
-                .filter(staffs -> staffs.getId() == id)
-                .findFirst()
-                .orElse(null);
-        if (staff != null) {
-            if (staff instanceof Volunteer volun) {
-                displayVolunteerInfo(volun, "Update Employee Volunteer");
-                updateVolunteerInfo(volun);
-            }
-            else if (staff instanceof HourlySalaryEmployee hourly) {
-                displayHourlyEmployeeInfo(hourly, "Update Employee HourlySalaryEmployee");
-                updateHourlyEmployeeInfo(hourly);
-            }else if (staff instanceof SalariedEmployee sal) {
-                displaySalariedEmployee(sal, "Update Employee SalariedEmployee");
-                upDateSalariedEmployee(sal);
-            }
-        } else {
-            System.out.println("Not found");
+        try {
+            System.out.println("=======*" + "Update Employee" + "*=======");
+            System.out.print("Enter ID to search for Update: ");
+            String idInput = validateInput(new Scanner(System.in), "ID", "\\d+", "Enter ID to search for Update: ");
+            int id = Integer.parseInt(idInput);
+                StaffMember staff = staffMembers.stream()
+                        .filter(staffs -> staffs.getId() == id)
+                        .findFirst()
+                        .orElse(null);
+                if (staff != null) {
+                    if (staff instanceof Volunteer volun) {
+                        displayVolunteerInfo(volun, "Update Employee Volunteer");
+                        updateVolunteerInfo(volun);
+                    } else if (staff instanceof HourlySalaryEmployee hourly) {
+                        displayHourlyEmployeeInfo(hourly, "Update Employee HourlySalaryEmployee");
+                        updateHourlyEmployeeInfo(hourly);
+                    } else if (staff instanceof SalariedEmployee sal) {
+                        displaySalariedEmployee(sal, "Update Employee SalariedEmployee");
+                        upDateSalariedEmployee(sal);
+                    }
+                } else {
+                    System.out.println("Not found");
+                }
+        }catch (Exception e) {
+            System.out.println("Is in Valid");
         }
+
     }
     public static void removeStaffMembers() {
         System.out.print("Enter ID to remove from list :");
-        int id  = new Scanner(System.in).nextInt();
+        String idInput = validateInput(new Scanner(System.in), "ID", "\\d+", "Enter ID to remove from list : ");
+        int id = Integer.parseInt(idInput);
         boolean removeSuccess = staffMembers.removeIf(staff -> {
             boolean b = staff.getId() == id;
             return b;
